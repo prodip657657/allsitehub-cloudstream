@@ -1,0 +1,93 @@
+package com.allsitehub
+
+/** Saved website directory entries for use when the live site is unavailable. */
+internal object EmbeddedCatalog {
+    val records: List<SiteEntry> by lazy {
+        RAW.trimIndent().lineSequence().mapNotNull { line ->
+            val p = line.split('|', limit = 3)
+            if (p.size == 3) SiteEntry(p[0], p[1], p[2]) else null
+        }.toList()
+    }
+    private val RAW = """
+        Movies & Shows|cinezo.net|https://cinezo.net
+        Movies & Shows|7movies.in|https://7movies.in
+        Movies & Shows|flixhub.studio|https://flixhub.studio
+        Movies & Shows|thugtv.online|https://thugtv.online
+        Movies & Shows|arrowtv.net|https://arrowtv.net
+        Movies & Shows|1tube.org|https://1tube.org
+        Movies & Shows|redflix.club|https://redflix.club
+        Movies & Shows|streamo.st|https://streamo.st
+        Movies & Shows|www.1shows.org|https://www.1shows.org
+        Movies & Shows|www.1flex.org|https://www.1flex.org
+        Movies & Shows|nippleflix.org|https://nippleflix.org
+        Movies & Shows|pantyflix.org|https://pantyflix.org
+        Movies & Shows|shuttletv.su|https://shuttletv.su
+        Movies & Shows|youshows.org|https://youshows.org
+        Movies & Shows|primeshows.org|https://primeshows.org
+        Movies & Shows|willow.arlen.icu|https://willow.arlen.icu
+        Movies & Shows|vuflix.co|https://vuflix.co
+        Movies & Shows|7reels.cc|https://7reels.cc
+        Movies & Shows|anicine.xyz|https://anicine.xyz
+        Movies & Shows|flixhub.aniflix.uno|https://flixhub.aniflix.uno
+        Movies & Shows|cinehd.vc|https://cinehd.vc
+        Movies & Shows|cinex.lol|https://cinex.lol
+        Anime|yenime.net|https://yenime.net
+        Anime|www.enma.lol|https://www.enma.lol
+        Anime|flixani.studio|https://flixani.studio
+        Anime|animetsu.site|https://animetsu.site
+        Anime|anishows.org|https://anishows.org
+        Anime|kaa.lt|https://kaa.lt
+        Anime|animetvplus.xyz|https://animetvplus.xyz
+        Anime|anikototv.to|https://anikototv.to
+        Anime|justanime.to|https://justanime.to
+        Anime|hianime.at|https://hianime.at
+        Anime|animesalt.link|https://animesalt.link
+        Anime|senpaiflix.fun|https://senpaiflix.fun
+        Anime|animextrons.co.in|https://animextrons.co.in
+        Anime|watchanimez.me|https://watchanimez.me
+        Anime|aniwaves.ru|https://aniwaves.ru
+        Anime|animerulz.co.in|https://animerulz.co.in
+        Anime|dub.animeplay.icu|https://dub.animeplay.icu
+        Anime|otanox.online|https://otanox.online
+        Manga|mangaball.net|https://mangaball.net
+        Manga|comick.dev|https://comick.dev
+        Manga|qtoon.org|https://qtoon.org
+        Manga|weebcentral.com|https://weebcentral.com
+        Manga|kingofshojo.com|https://kingofshojo.com
+        Manga|www.webtoons.com|https://www.webtoons.com
+        Manga|anireads.cc|https://anireads.cc
+        Live TV & Sports|cinevid.st|https://cinevid.st
+        Live TV & Sports|www.fancode.com|https://www.fancode.com
+        Live TV & Sports|ondemand.st|https://ondemand.st
+        Live TV & Sports|thestreameast.top|https://thestreameast.top
+        Live TV & Sports|stmify.com|https://stmify.com
+        Live TV & Sports|famelack.com|https://famelack.com
+        Live TV & Sports|publiciptv.com|https://publiciptv.com
+        Live TV & Sports|en97.sportplus.watch|https://en97.sportplus.watch
+        Live TV & Sports|streameastnow.net|https://streameastnow.net
+        Paid|www.netflix.com|https://www.netflix.com
+        Paid|www.hotstar.com|https://www.hotstar.com
+        Paid|www.hbomax.com|https://www.hbomax.com
+        Paid|tv.apple.com|https://tv.apple.com
+        Paid|www.primevideo.com|https://www.primevideo.com
+        Paid|sso.crunchyroll.com|https://sso.crunchyroll.com
+        Paid|www.peacocktv.com|https://www.peacocktv.com
+        Paid|www.shudder.com|https://www.shudder.com
+        Paid|auth.hulu.com|https://auth.hulu.com
+        Paid|www.paramountplus.com|https://www.paramountplus.com
+        Paid|www.mgmplus.com|https://www.mgmplus.com
+        Paid|www.amcplus.com|https://www.amcplus.com
+        Apps|netmirror.gg|https://netmirror.gg
+        Apps|www.moviesbox.com.co|https://www.moviesbox.com.co
+        Apps|pikashowtv.in|https://pikashowtv.in
+        Apps|playtorrio.pages.dev|https://playtorrio.pages.dev
+        Apps|youcineapkpro.com|https://youcineapkpro.com
+        Apps|onstreamapks.app|https://onstreamapks.app
+        Download|hdhub4u.bi|https://hdhub4u.bi
+        Download|filecr.com|https://filecr.com
+        Download|filmyfly.bingo|https://filmyfly.bingo
+        Download|fitgirl-repacks.site|https://fitgirl-repacks.site
+        Games|www.crazygames.com|https://www.crazygames.com
+        Games|ankergames.net|https://ankergames.net
+    """
+}
