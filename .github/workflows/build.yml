@@ -1,0 +1,45 @@
+name: Build and publish CloudStream extension
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths-ignore: ['**/*.md']
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+      - name: Install Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Install Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Install Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+      - name: Compile extension and generate plugin metadata
+        run: gradle --no-daemon make makePluginsJson
+      - name: Collect published artifacts
+        run: |
+          mkdir -p "$RUNNER_TEMP/cloudstream-builds"
+          cp AllSiteHubProvider/build/*.cs3 "$RUNNER_TEMP/cloudstream-builds/"
+          cp build/plugins.json "$RUNNER_TEMP/cloudstream-builds/plugins.json"
+          python3 scripts/generate_repo_json.py "$GITHUB_REPOSITORY" "$RUNNER_TEMP/cloudstream-builds/repo.json"
+      - name: Publish builds branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd "$RUNNER_TEMP/cloudstream-builds"
+          git init
+          git checkout -b builds
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .
+          git commit -m "Build $GITHUB_SHA"
+          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:builds
