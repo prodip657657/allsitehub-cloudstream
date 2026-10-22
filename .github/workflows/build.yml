@@ -1,6 +1,12 @@
 name: Build and publish CloudStream extension
 on:
   workflow_dispatch:
+    inputs:
+      rebuild:
+        description: 'Build and publish AllSiteHub directory extension'
+        required: false
+        default: false
+        type: boolean
   push:
     branches: [main]
     paths-ignore: ['**/*.md']
