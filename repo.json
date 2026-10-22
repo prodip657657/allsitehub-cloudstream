@@ -1,0 +1,8 @@
+{
+  "name": "AllSiteHub Directory (Community Beta)",
+  "description": "Category-based index of links on AllSiteHub; does not play videos.",
+  "manifestVersion": 1,
+  "pluginLists": [
+    "https://raw.githubusercontent.com/YOUR_USERNAME/allsitehub-cloudstream/builds/plugins.json"
+  ]
+}
