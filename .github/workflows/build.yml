@@ -1,4 +1,5 @@
 name: Build and publish CloudStream extension
+# Refresh GitHub Actions workflow
 on:
   workflow_dispatch:
     inputs:
